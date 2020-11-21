@@ -8,13 +8,19 @@ from pydub import AudioSegment
 from pydub.playback import play
 import pygame
 import playsound
+from Colours import Colours
 
 CURSOR_UP_ONE = '\x1b[1A' 
 ERASE_LINE = '\x1b[2K'
 HEIGHT = 12
 
-def display(bar_heights):
+def convert_to_wav(filename):
+    audio = AudioSegment.from_mp3(filename)
+    audio.export(filename + ".wav", format="wav")
+
+def display(bar_heights, is_rgb):
     sys.stdout.write((HEIGHT) * CURSOR_UP_ONE + ERASE_LINE + "\r")
+    colours = Colours()
 
     for i in range(HEIGHT):
         line = ''
@@ -23,19 +29,32 @@ def display(bar_heights):
                 line += '|'
             else:
                 line += ' '
+        if is_rgb:
+            colours.set_colour(i)
         sys.stdout.write('\n ' + line)
+    colours.reset_colours()
     sys.stdout.flush()
 
 def main():
     # Some lines of the following have been shamelessly stolen from https://gitlab.com/avirzayev/medium-audio-visualizer-code/-/blob/master/main.py
+    
+    # Check usage
+    if len(sys.argv) not in [2, 3]:
+        sys.exit("Usage: python3 visualiser.py path/to/file.mp3 [rgb]")
 
-    audio = "path/to/file.mp3"
+    # Parse command-line arguments
+    path = sys.argv[1]
+    is_rgb = True if len(sys.argv) == 3 else False
     
+    # audio = "path/to/file.mp3"
+    filename, file_extension = os.path.splitext(path)
     # Convert to wav
-    sound = AudioSegment.from_mp3(audio)
-    sound.export("path/to/file.wav", format="wav")
+    if file_extension == '.mp3':
+        convert_to_wav(filename)
+    # sound = AudioSegment.from_mp3(filename)
+    # sound.export("path/to/file.wav", format="wav")
     
-    filename = "path/to/file.wav"
+    filename = filename + ".wav"
 
     # getting information from the file
     time_series, sample_rate = librosa.load(filename)
@@ -81,7 +100,6 @@ def main():
 
     sys.stdout.write(2 * CURSOR_UP_ONE + ERASE_LINE)
 
-    # How do you terminate this loop when the song ends? It's an infinite loop at the moment, can only be terminated with Ctrl + C
     while True:
 
         t = int(round(time.time() * 1000))
@@ -96,7 +114,7 @@ def main():
             bar_heights.append(int(b.height / 10))
         
         # Display the bars
-        display(bar_heights)
+        display(bar_heights, is_rgb)
 
 # Driver program 
 if __name__ == '__main__':  
