@@ -35,7 +35,7 @@ class Visualiser:
                     line += ' '
             if self.is_rgb:
                 colours.set_colour(i)
-            sys.stdout.write('\n ' + line)
+            sys.stdout.write('\n ' + line + ' ')
         colours.reset_colours()
         sys.stdout.flush()
 
