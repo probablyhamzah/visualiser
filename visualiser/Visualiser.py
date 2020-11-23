@@ -7,7 +7,6 @@ import numpy as np
 from pydub import AudioSegment
 from pydub.playback import play
 import pygame
-import playsound
 from testingvisualiser.Colours import Colours
 
 CURSOR_UP_ONE = '\x1b[1A' 
@@ -43,21 +42,10 @@ class Visualiser:
     def visualise(self):
         # Some lines of the following have been shamelessly stolen from https://gitlab.com/avirzayev/medium-audio-visualizer-code/-/blob/master/main.py
         
-        # Check usage
-        # if len(sys.argv) not in [2, 3]:
-            # sys.exit("Usage: python3 visualiser.py path/to/file.mp3 [rgb]")
-
-        # Parse command-line arguments
-        # path = sys.argv[1]
-        # is_rgb = True if len(sys.argv) == 3 else False
-        
-        # audio = "path/to/file.mp3"
         filename, file_extension = os.path.splitext(self.path)
         # Convert to wav
         if file_extension != '.wav':
             self.convert_to_wav(filename)
-        # sound = AudioSegment.from_mp3(filename)
-        # sound.export("path/to/file.wav", format="wav")
         
         filename = filename + ".wav"
 
@@ -120,7 +108,3 @@ class Visualiser:
             
             # Display the bars
             self.display(bar_heights)
-
-# Driver program 
-# if __name__ == '__main__':  
-    # main()
