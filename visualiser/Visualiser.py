@@ -93,7 +93,8 @@ class Visualiser:
 
         sys.stdout.write(2 * CURSOR_UP_ONE + ERASE_LINE)
 
-        while True:
+        is_playing = True
+        while is_playing:
 
             t = int(round(time.time() * 1000))
             deltaTime = (t - getTicksLastFrame) / 1000.0
@@ -103,8 +104,14 @@ class Visualiser:
             bar_heights = []
 
             for b in bars:
-                b.update(deltaTime, spectrogram[int(b.freq * frequencies_index_ratio)][int(((t - start_time)/1000.0) * time_index_ratio)])
-                bar_heights.append(int(b.height / 10))
+                try:
+                    b.update(deltaTime, spectrogram[int(b.freq * frequencies_index_ratio)][int(((t - start_time)/1000.0) * time_index_ratio)])
+                    bar_heights.append(int(b.height / 10))
+                except:
+                    is_playing = False
+            
+            if not is_playing:
+                break
             
             # Display the bars
             self.display(bar_heights)
