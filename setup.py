@@ -2,13 +2,13 @@ from distutils.core import setup
 setup(
     name = 'visualiser',   
     packages = ['visualiser'],
-    version = '0.7',
+    version = '0.8',
     license='MIT',
     description = 'A terminal visualiser.',
     author = 'possiblyhamzah',
     author_email = 'possiblyhamzah@gmail.com',
     url = 'https://github.com/probablyhamzah/visualiser',
-    download_url = 'https://github.com/probablyhamzah/visualiser/archive/v_07.tar.gz',
+    download_url = 'https://github.com/probablyhamzah/visualiser/archive/v_08.tar.gz',
     keywords = ['visualiser', 'terminal'],
     install_requires=[
             'librosa',
