@@ -19,7 +19,10 @@ class Visualiser:
         self.is_rgb = is_rgb
 
     def convert_to_wav(self, filename):
-        audio = AudioSegment.from_mp3(filename)
+        try:
+            audio = AudioSegment.from_mp3(filename + '.mp3')
+        except:
+            audio = AudioSegment.from_mp3(filename)
         audio.export(filename + ".wav", format="wav")
 
     def display(self, bar_heights):
