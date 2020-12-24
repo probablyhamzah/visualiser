@@ -1,13 +1,13 @@
 import time 
 import sys 
 import os 
-from testingvisualiser.AudioBar import AudioBar
+from visualiser.AudioBar import AudioBar
 import librosa
 import numpy as np
 from pydub import AudioSegment
 from pydub.playback import play
 import pygame
-from testingvisualiser.Colours import Colours
+from visualiser.Colours import Colours
 
 CURSOR_UP_ONE = '\x1b[1A' 
 ERASE_LINE = '\x1b[2K'
