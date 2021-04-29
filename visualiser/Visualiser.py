@@ -11,7 +11,7 @@ from visualiser.Colours import Colours
 
 CURSOR_UP_ONE = '\x1b[1A' 
 ERASE_LINE = '\x1b[2K'
-HEIGHT = 12
+HEIGHT = 20
 
 class Visualiser:
     def __init__(self, path, is_rgb=False):
