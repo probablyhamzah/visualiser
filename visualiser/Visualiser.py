@@ -43,7 +43,7 @@ class Visualiser:
         sys.stdout.flush()
 
     def visualise(self):
-        # Some lines of the following have been shamelessly stolen from https://gitlab.com/avirzayev/medium-audio-visualizer-code/-/blob/master/main.py
+        # Some lines of the following have been taken from https://gitlab.com/avirzayev/medium-audio-visualizer-code/-/blob/master/main.py
         
         filename, file_extension = os.path.splitext(self.path)
         # Convert to wav
