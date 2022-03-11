@@ -9,7 +9,11 @@ A terminal visualiser for songs.
 ```bash
 pip3 install visualiser
 ```
-
+Or clone this repo.
+Also make sure ffmpeg is installed.
+```bash
+sudo apt install ffmpeg
+```
 ## Usage
 ```python
 from visualiser import Visualiser
